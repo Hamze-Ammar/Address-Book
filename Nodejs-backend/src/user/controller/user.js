@@ -38,6 +38,8 @@ async function register(req, res) {
     return res.send({ user: addUserResult._id });
   } catch (error) {
     console.log(error);
+    return res.send({ error });
+
   }
 }
 

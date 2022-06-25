@@ -1,4 +1,4 @@
-const { addContact, getById } = require("../service");
+const { addContact, getById, getByContactId } = require("../service");
 const User = require("../../../model/User");
 const Contact = require("../../../model/Contact");
 
@@ -46,6 +46,22 @@ async function get(req, res) {
   }
 }
 
+async function getOne(req, res) {
+    try {
+      console.log(req.query);
+  
+      if (req.query.id) {
+        // ?id=k1231 -> query paramet
+        const id = req.query.id;
+        const result = await getByContactId(id);
+        console.log("result of specific contact =>", result);
+        return res.send(result);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
 async function removeContact(req, res) {
   try {
     const contact = await Contact.findOne({ _id: req.query.id });
@@ -59,7 +75,7 @@ async function removeContact(req, res) {
       { $pull: { contacts: contact._id } }
     );
 
-    return res.send("product removed: ");
+    return res.send({"msg": "contact removed"});
   } catch (error) {
     console.log(error);
   }
@@ -77,7 +93,7 @@ async function updateContact(req, res) {
                     location: req.body.location,
                 }
             });
-        return res.send("Contact has been updated");
+        return res.send({"msg":"Contact has been updated"});
     }catch (error) {
         console.log(error);
     }
@@ -86,6 +102,7 @@ async function updateContact(req, res) {
 module.exports = {
   add,
   get,
+  getOne,
   removeContact,
   updateContact,
 };

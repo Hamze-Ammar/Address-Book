@@ -29,8 +29,14 @@ async function addContact(body) {
     return await Contact.find({user: user_id});
   }
 
+  async function getByContactId(id) {
+    // projection, in case you want to return certain values
+    return await Contact.findById(id);
+  }
+
 
   module.exports = {
     addContact,
     getById,
+    getByContactId,
   }

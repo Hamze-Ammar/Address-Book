@@ -1,11 +1,14 @@
 import { useState } from "react";
 
+
 const AddContact = () => {
+  // const [editMode, setEditMode] = useState(false);
   const [fullName, setFullName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [relationship, setStatus] = useState("");
   const [email, setEmail] = useState("");
   const [alert, setAlert] = useState(false);
+
 
   const saveToServer = async (data) => {
     console.log(data);
@@ -19,7 +22,6 @@ const AddContact = () => {
     });
     const response = await res.json();
     console.log(response);
-
   }
 
   const validate = (e) => {

@@ -222,12 +222,12 @@ span.psw {
   border-radius: 5px;
 }
 
+
 @media screen and (max-width: 920px) {
   .add-contact .container {
     width: 80%;
   }
 }
-
 
 .add-contact input {
   background-color: #fff;
@@ -245,4 +245,49 @@ span.psw {
 
 .alert {
   color: #f44336;
+}
+
+/* ======show contact======= */
+
+.show-contact hr {
+  width: 85%;
+  border: 1px solid #333;
+  margin: 25px 0 ;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+
+tr:hover {
+  background-color:#ffffff;
+  color: rgb(0, 0, 0);
+}
+
+.green {
+  color:#04aa6d;
+}
+.red {
+  color: #f44336;
+}
+
+.icon {
+  margin-right: 10px;
+  float: right;
+}
+.icon:hover {
+  color: rgba(1, 1, 1, 0.3);
+  cursor: pointer;
 }

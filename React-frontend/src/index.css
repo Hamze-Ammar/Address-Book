@@ -291,3 +291,9 @@ tr:hover {
   color: rgba(1, 1, 1, 0.3);
   cursor: pointer;
 }
+
+.select {
+  height: 30px;
+  width: 175px;
+  font-size: 15px;
+}

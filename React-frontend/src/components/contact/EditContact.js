@@ -19,14 +19,11 @@ const EditContact = () => {
     const getContact = async () => {
       const contactFromServer = await fetchContact();
       setContact(contactFromServer);
-
-      console.log("hello");
     };
     getContact();
   }, [id]);
 
   useEffect(() => {
-    console.log("heeyyoppwww");
     setFullName(contact.fullName);
     setPhoneNumber(contact.phoneNumber);
     setStatus(contact.relationship);

@@ -5,7 +5,7 @@ import { FaPen, FaTrashAlt } from "react-icons/fa";
 
 const Row = ({ contact, setReload }) => {
     const navigate = useNavigate();
-  console.log(contact._id);
+  //console.log(contact._id);
   let id = contact._id;
 
   //Delete contact

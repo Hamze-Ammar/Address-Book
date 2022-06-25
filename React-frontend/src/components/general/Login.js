@@ -9,13 +9,8 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [userType, setUserType] = useState("");
   const [token, setToken] = useState("");
-
   let navigate = useNavigate();
-  const routeChange = (x) => {
-    let path;
-    x ? (path = `/admin`) : (path = `/`);
-    navigate(path);
-  };
+
 
   //Login User
   const loginUser = async (credentials) => {
@@ -39,6 +34,10 @@ export default function Login() {
       token && localStorage.setItem("access_token", token);
       user_info && localStorage.setItem("user_id", user_info._id);
       user_info && localStorage.setItem("user_name", user_info.name);
+
+      //redirect user
+      navigate('/');
+
     }
   };
 

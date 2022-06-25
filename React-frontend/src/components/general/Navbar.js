@@ -1,10 +1,22 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { FaLaughWink } from 'react-icons/fa';
+import { useNavigate } from "react-router-dom";
+
 
 export default function Navbar(props) {
   let name = localStorage.getItem("user_name");
   let greetings = `Hi ${name}!`;
+  let navigate = useNavigate();
+
+  const logOut = () => {
+    if (!localStorage.getItem('user_name')){return}
+    localStorage.removeItem('user_id');
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('user_name');
+    alert("You are now logged out!")
+    navigate('/login');
+  }
   return (
     <div>
       <div className="topnav">
@@ -33,7 +45,7 @@ export default function Navbar(props) {
               Register
             </span>
           </Link>
-          <a className="topnav-right" href="#">
+          <a className="topnav-right" href="#" onClick={logOut}>
             Logout
           </a>
         </div>

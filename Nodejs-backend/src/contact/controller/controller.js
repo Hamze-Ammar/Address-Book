@@ -7,7 +7,7 @@ async function add(req, res) {
     console.log(req.body);
 
     const newContact = await addContact(req.body);
-    console.log("newConact =>", newContact);
+    console.log("newContact =>", newContact);
 
     // Should add userID here
     // We're gonna skipt it for now

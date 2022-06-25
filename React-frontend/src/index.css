@@ -65,6 +65,7 @@ input[type="password"] {
   display: inline-block;
   border: none;
   background: #f1f1f1;
+  font-size: large;
 }
 
 /* Add a background color when the inputs get focus */

@@ -1,6 +1,8 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import jwt_decode from "jwt-decode";
+
 
 export default function Register() {
   const [name, setName] = useState("");
@@ -8,6 +10,8 @@ export default function Register() {
   const [password, setPassword] = useState("");
   const [password_confirmation, setPasswordConfirmation] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
+  let navigate = useNavigate();
+
 
   //Registering User
   const registerUser = async (credentials) => {
@@ -22,6 +26,7 @@ export default function Register() {
     //console.log(data);
     if (data.user){
         alert("You've successfully registered")
+        loginUser({email, password});
     }
     if (data.error){
         //console.log(data.error.code);
@@ -49,6 +54,34 @@ export default function Register() {
     setPassword("");
     setPasswordConfirmation("");
     setRememberMe(false);
+  };
+
+  //Login user after he signs up successfully
+  const loginUser = async (credentials) => {
+    const res = await fetch("http://localhost:3001/api/user/auth/login", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(credentials),
+    });
+    const data = await res.json();
+    //console.log(data);
+    // data.error ? alert("User Not Found") : alert("You are now signed in!");
+    if (data.err) {
+      alert(data.err);
+    } else if (data.access_token) {
+      let token = data.access_token;
+      //console.log(token);
+      let user_info = jwt_decode(token);
+      console.log(user_info);
+      token && localStorage.setItem("access_token", token);
+      user_info && localStorage.setItem("user_id", user_info._id);
+      user_info && localStorage.setItem("user_name", user_info.name);
+
+      //redirect user
+      navigate('/');
+    }
   };
 
   return (

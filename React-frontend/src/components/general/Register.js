@@ -38,7 +38,12 @@ export default function Register() {
       alert("Please fill all fields!");
       return;
     }
-    registerUser({ name, email, password, password_confirmation });
+    if (password!==password_confirmation){
+        alert("Confirm your password");
+        setPasswordConfirmation("");
+        return;
+    }
+    registerUser({ name, email, password });
     setName("");
     setEmail("");
     setPassword("");

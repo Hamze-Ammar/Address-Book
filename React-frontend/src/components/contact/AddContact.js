@@ -1,19 +1,41 @@
 import { useState } from "react";
 
 const AddContact = () => {
-  const [full_name, setFullName] = useState("");
-  const [phone_number, setPhoneNumber] = useState("");
-  const [status, setStatus] = useState("");
+  const [fullName, setFullName] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [relationship, setStatus] = useState("");
   const [email, setEmail] = useState("");
   const [alert, setAlert] = useState(false);
+
+  const saveToServer = async (data) => {
+    console.log(data);
+    const res = await fetch("http://localhost:3001/api/contact/add", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+        "x-access-token": localStorage.getItem("access_token"),
+      },
+      body: JSON.stringify(data),
+    });
+    const response = await res.json();
+    console.log(response);
+
+  }
 
   const validate = (e) => {
     e.preventDefault();
     setAlert(false);
-    if (!full_name || !phone_number || !status || !email){
+    if (!fullName || !phoneNumber || !relationship || !email){
       setAlert(true);
       return;
     }
+    // get the id from the local storage
+    let user = localStorage.getItem("user_id");
+    saveToServer({fullName, phoneNumber, relationship, email, user });
+    setFullName('');
+    setPhoneNumber('');
+    setStatus('');
+    setEmail('');
   }
 
   return (
@@ -25,6 +47,7 @@ const AddContact = () => {
         <form>
           <label htmlFor="">Full Name</label>
           <input
+            value = {fullName}
             type="text"
             placeholder="Full Name"
             onChange={(e) => {
@@ -33,6 +56,7 @@ const AddContact = () => {
           />
           <label htmlFor="">Phone Number</label>
           <input
+          value = {phoneNumber}
             type="text"
             placeholder="Phone Number"
             onChange={(e) => {
@@ -41,6 +65,7 @@ const AddContact = () => {
           />
           <label htmlFor="">Relationship Status</label>
           <input
+          value = {relationship}
             type="text"
             placeholder="Relationship Status"
             onChange={(e) => {
@@ -49,6 +74,7 @@ const AddContact = () => {
           />
           <label htmlFor="">Email</label>
           <input
+          value = {email}
             type="text"
             placeholder="Email"
             onChange={(e) => {

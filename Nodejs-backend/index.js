@@ -19,4 +19,4 @@ app.use(express.json());
 app.use('/api/user', userRouter);
 app.use('/api/contact', contactRouter);
 
-app.listen(3000, () => console.log('Server running'));
+app.listen(3001, () => console.log('Server running'));

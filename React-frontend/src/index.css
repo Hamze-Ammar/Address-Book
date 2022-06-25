@@ -164,3 +164,47 @@ display: table;
   width: 100%;
 }
 }
+
+
+/* =====Login===== */
+
+.loginContainer {
+  width: 500px;
+  margin: 100px auto;
+  border: 3px solid #04aa6d;
+  background-color: #fff;
+
+}
+
+.cancelbtnn {
+  width: auto;
+  padding: 10px 18px;
+  background-color: #f44336;
+}
+
+/* Style the horizontal ruler */
+hr {
+  width: 85%;
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+
+.containerLogin {
+  padding: 16px;
+}
+
+span.psw {
+  float: right;
+  padding-top: 16px;
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+  span.psw {
+    display: block;
+    float: none;
+  }
+  .cancelbtn {
+    width: 100%;
+  }
+}

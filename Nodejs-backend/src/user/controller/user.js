@@ -46,17 +46,17 @@ async function register(req, res) {
 async function login(req, res) {
   try {
     const user = await getByEmail(req.body.email);
-    if (!user) return res.status(400).send('invalid credentials');
+    if (!user) return res.status(401).send({err:'Email Not Found'});
 
     const validPassword = await bcrypt.compare(req.body.password, user.password);
-    if (!validPassword) return res.status(400).send('invalid credentials');
+    if (!validPassword) return res.status(401).send({err:'Wrong Password'});
 
     const token = jwt.sign(
       {_id: user._id, name: user.name, email: user.email},
       TOKEN_SECRET
     );
 
-    return res.header('auth-token', token).send(token);
+    return res.header('auth-token', token).send({access_token: token});
   } catch (error) {
     console.log(error);
     res.status(500).send(error);

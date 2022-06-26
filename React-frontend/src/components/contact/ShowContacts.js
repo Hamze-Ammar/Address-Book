@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Row from "./Row";
+import ConfirmDelete from "./ConfirmDelete";
 
 const ShowContacts = () => {
   const [contacts, setContacts] = useState([]);
@@ -8,6 +9,10 @@ const ShowContacts = () => {
   const [filter, setFilter] = useState("");
   const [option, setOption] = useState("");
   const [spare, setSpare] = useState([]);
+  //Delete confirmation states
+  const [showDelete, setShowDelete] = useState(false);
+  const [confirmDelete, setConfirmDelete] = useState(false);
+  const [deletedId, setDeletedId] = useState('');
 //   console.log(filter);
 //   console.log(option);
 
@@ -125,11 +130,12 @@ const ShowContacts = () => {
           </tr>
           {contacts &&
             contacts.map((contact) => {
-              return <Row contact={contact} setReload={setReload} />;
+              return <Row contact={contact} setReload={setReload} setShowDelete={setShowDelete} confirmDelete={confirmDelete} setConfirmDelete={setConfirmDelete} deletedId={deletedId} setDeletedId={setDeletedId} />;
             })}
           {/* {contacts.filter((contact)=> contact.fullName == filter ).length} */}
         </table>
       </div>
+      {showDelete && <ConfirmDelete setShowDelete={setShowDelete} setConfirmDelete={setConfirmDelete}/>}
     </div>
   );
 };

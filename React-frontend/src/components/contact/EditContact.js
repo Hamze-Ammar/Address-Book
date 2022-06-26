@@ -124,8 +124,8 @@ const EditContact = () => {
               setEmail(e.target.value);
             }}
           />
-          <label htmlFor="">Location</label>
-          <input type="text" />
+          {/* <label htmlFor="">Location</label>
+          <input type="text" /> */}
           <button type="submit" onClick={validate}>
             Submit
           </button>

@@ -1,11 +1,24 @@
-import React from "react";
+import React  from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { FaPen, FaTrashAlt } from "react-icons/fa";
+import { useEffect } from "react";
 
-const Row = ({ contact, setReload }) => {
+const Row = ({ contact, setReload, setShowDelete, confirmDelete, setConfirmDelete,deletedId, setDeletedId }) => {
     const navigate = useNavigate();
 //   console.log("1: ",String(contact.location.coordinates[0]));
   let id = contact._id;
+
+  //Confirm delete:
+  const askToConfirm = () => {
+    setShowDelete(true);
+  }
+
+  
+  useEffect(() => {
+    if (confirmDelete && deletedId=== id){
+        deleteContact();
+    }
+  }, [confirmDelete]);
 
   //Delete contact
   const deleteContact = async () => {
@@ -24,6 +37,7 @@ const Row = ({ contact, setReload }) => {
       console.log(response);
       if (response.msg==="contact removed"){
         console.log("yes");
+        setConfirmDelete(false);
         setReload(id);
       }
     } catch (err) {
@@ -45,7 +59,8 @@ const Row = ({ contact, setReload }) => {
             className="icon red"
             onClick={() => {
               console.log("hiiii");
-              deleteContact();
+              askToConfirm();
+              setDeletedId(id);
             }}
           >
             <FaTrashAlt />

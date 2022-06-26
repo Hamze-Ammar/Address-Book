@@ -6,6 +6,8 @@ import Login from "./components/general/Login";
 import AddContact from "./components/contact/AddContact";
 import ShowContacts from "./components/contact/ShowContacts";
 import EditContact from "./components/contact/EditContact";
+import Leaflet from "./components/leaflet/Leaflet";
+import TestMap from "./components/leaflet/TestMap";
 
 function App() {
   return (
@@ -13,6 +15,25 @@ function App() {
     <div className="App">
       <Navbar/>
       <Routes>
+        {/* Testing leaflet */}
+        <Route
+            path="/map"
+            element={
+              <>
+              <Leaflet/>
+              </>
+            }
+            ></Route>
+            <Route
+            path="/map1"
+            element={
+              <>
+              <TestMap/>
+              </>
+            }
+            ></Route>
+        {/* End Testing leaflet */}
+
       <Route
             path="/"
             element={

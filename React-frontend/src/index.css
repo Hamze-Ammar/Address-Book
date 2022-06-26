@@ -445,3 +445,19 @@ tr:hover {
   width: 150px;
   background-color: #333;
 }
+
+/* ====show password===== */
+.password-field {
+  position:relative ;
+}
+.eye {
+  font-size: 18px;
+  position:absolute ;
+  right: 20px;
+  top: 20px;
+  cursor: pointer;
+  color: #888;
+}
+.eye:hover {
+  color: #333;
+}

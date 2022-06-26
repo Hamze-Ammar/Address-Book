@@ -3,6 +3,9 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import jwt_decode from "jwt-decode";
+import { FaEye } from "react-icons/fa";
+import { FaEyeSlash } from "react-icons/fa";
+
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -10,6 +13,8 @@ export default function Login() {
   const [userType, setUserType] = useState("");
   const [token, setToken] = useState("");
   let navigate = useNavigate();
+  //show password
+  const [passwordDisplay, setPasswordDisplay] = useState(false);
 
 
   //Login User
@@ -54,6 +59,19 @@ export default function Login() {
     setPassword("");
   };
 
+  //Show password
+  const showPassword = () => {
+    let element = document.getElementById("id_password");
+      if (element.type === "password") {
+        element.type = "text";
+        setPasswordDisplay(true);
+       } else {
+        element.type = "password";
+        setPasswordDisplay(false);
+
+    }
+  }
+
   return (
     <div className={"loginContainer"}>
       <span className="close" onClick={()=>{navigate('/');}}>&times;</span>
@@ -79,7 +97,9 @@ export default function Login() {
           <label for="psw">
             <b>Password</b>
           </label>
+          <div className='password-field'>
           <input
+            id="id_password"
             type="password"
             placeholder="Enter Password"
             name="psw"
@@ -89,7 +109,9 @@ export default function Login() {
             }}
             required
           />
-
+          {!passwordDisplay && <span className='eye' onClick={showPassword} ><FaEye/></span>} 
+          {passwordDisplay && <span className='eye' onClick={showPassword} ><FaEyeSlash/></span>} 
+          </div>
           <button type="submit">Login</button>
           <label>
             <input type="checkbox" name="remember" /> Remember me

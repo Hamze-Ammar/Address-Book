@@ -84,6 +84,7 @@ const AddContact = () => {
   return (
     <div className="add-contact">
       <div className="container">
+      <span className="close" onClick={()=>{navigate('/');}}>&times;</span>
         <h2>Add New Contact</h2>
         <p>Please Fill out all fields</p>
         <p className="alert">{alert && "All fields required"}</p>

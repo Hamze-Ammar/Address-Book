@@ -56,6 +56,7 @@ export default function Login() {
 
   return (
     <div className={"loginContainer"}>
+      <span className="close" onClick={()=>{navigate('/');}}>&times;</span>
       <h1 style={{ textAlign: "center" }}>Sign In</h1>
       <hr />
 

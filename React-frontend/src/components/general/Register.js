@@ -89,6 +89,7 @@ export default function Register() {
     <div className="containerRegister">
       <form className="modalContent" onSubmit={onSubmit}>
         <div className={"container"}>
+      <span className="close" onClick={()=>{navigate('/');}}>&times;</span>
           <h1>Sign Up</h1>
           <p>Please fill in this form to create an account.</p>
           <hr className={"hr"} />

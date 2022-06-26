@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 const EditContact = () => {
@@ -8,6 +8,8 @@ const EditContact = () => {
   const [relationship, setStatus] = useState("");
   const [email, setEmail] = useState("");
   const [contact, setContact] = useState({});
+  let navigate = useNavigate();
+
 
   //get the contact id:
   const { id } = useParams();
@@ -83,6 +85,7 @@ const EditContact = () => {
   return (
     <div className="add-contact">
       <div className="container">
+      <span className="close" onClick={()=>{navigate('/');}}>&times;</span>
         <h2>Update Contact</h2>
         <form>
           <label htmlFor="">Full Name</label>

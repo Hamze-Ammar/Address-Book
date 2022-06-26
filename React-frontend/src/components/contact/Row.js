@@ -1,11 +1,10 @@
 import React from "react";
 import { Navigate, useNavigate } from "react-router-dom";
-
 import { FaPen, FaTrashAlt } from "react-icons/fa";
 
 const Row = ({ contact, setReload }) => {
     const navigate = useNavigate();
-  //console.log(contact._id);
+//   console.log("1: ",String(contact.location.coordinates[0]));
   let id = contact._id;
 
   //Delete contact
@@ -39,7 +38,8 @@ const Row = ({ contact, setReload }) => {
         <td>{contact.phoneNumber}</td>
         <td>{contact.relationship}</td>
         <td>{contact.email}</td>
-        <td>{contact.location}</td>
+        <td>{contact.location ? String(contact.location.coordinates[0]) : ""}</td>
+        <td>{contact.location  ? String(contact.location.coordinates[1]): ""}</td>
         <td>
           <span
             className="icon red"

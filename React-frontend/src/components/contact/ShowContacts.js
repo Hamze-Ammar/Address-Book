@@ -120,7 +120,7 @@ const ShowContacts = () => {
             <th>Phone Number</th>
             <th>Status</th>
             <th>Email</th>
-            <th>Location</th>
+            <th colspan="2">Location</th>
             <th>...</th>
           </tr>
           {contacts &&

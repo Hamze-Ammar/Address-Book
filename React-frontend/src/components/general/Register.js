@@ -80,6 +80,7 @@ export default function Register() {
       user_info && localStorage.setItem("user_name", user_info.name);
 
       //redirect user
+      alert("You are now logged in");
       navigate('/');
     }
   };

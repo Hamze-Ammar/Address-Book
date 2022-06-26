@@ -54,17 +54,23 @@ const AddContact = () => {
   const validate = (e) => {
     e.preventDefault();
     setAlert(false);
-    if (!fullName || !phoneNumber || !relationship || !email) {
+    if (!fullName || !phoneNumber || !relationship || !email || !latitude || !longitude) {
       setAlert(true);
       return;
     }
     // get the id from the local storage
     let user = localStorage.getItem("user_id");
-    saveToServer({ fullName, phoneNumber, relationship, email, user });
+    let location = {
+      "type": "Point",
+      "coordinates": [longitude, latitude]
+    }
+    saveToServer({ fullName, phoneNumber, relationship, email, location, user });
     setFullName("");
     setPhoneNumber("");
     setStatus("");
     setEmail("");
+    setLatitude("");
+    setLongitude("");
   };
 
   // Save info into store before navigate to map
@@ -128,7 +134,7 @@ const AddContact = () => {
               }}
               className="location-arrow"
             >
-              Choose location
+              Choose Location
             </a>{" "}
           </label>
           <input type="text" value={latitude} placeholder="latitude " />

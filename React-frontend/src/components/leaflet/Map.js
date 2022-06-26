@@ -9,19 +9,36 @@ import {
 } from "react-leaflet";
 import { useState } from "react";
 import { Icon } from "leaflet";
-// import L from "leaflet";
+import useStore from "../zustand/Store";
+import { Link, useNavigate } from "react-router-dom";
 
 const TestMap = () => {
-    const [lat, setLat] = useState("");
-    const [lng, setLng] = useState("");
-    console.log(lat);
-    console.log(lng);
+    const [latitude, setLatitude] = useState("");
+    const [longitude, setLongitude] = useState("");
+    console.log(latitude);
+    console.log(longitude);
+    let navigate = useNavigate();
+
+    //Onclick saveAndReturn
+    const saveAndReturn = () => {
+      console.log("clicked");
+      if (latitude && longitude){
+        useStore.setState({latitude});
+        useStore.setState({longitude});
+        navigate('/add');
+      }
+      else{
+        alert("Please click on the map and choose location!")
+        return
+      }
+    }
 
   function LocationMarkers() {
     // const initialMarkers: LatLng[] = [new LatLng(51.505, -0.09)];
     const [markers, setMarkers] = useState([]);
     // console.log(markers[0]);
     // setPoint(markers);
+
     const map = useMapEvents({
       click(e) {
         markers.push(e.latlng);
@@ -29,8 +46,8 @@ const TestMap = () => {
         // setPoint([e.latlng])
         if (markers[0]){
             // console.log(markers[0].lng);
-            setLat(markers[0].lat);
-            setLng(markers[0].lng);
+            setLatitude(markers[0].lat);
+            setLongitude(markers[0].lng);
         }
       },
     });
@@ -65,9 +82,9 @@ const TestMap = () => {
        </div>
        <div className="modal-map">
         <h2>Location</h2>
-        <h3>Latitude: {lat && lat} </h3>
-        <h3>Longitude: {lng && lng} </h3>
-        <button className="normal">Save Location</button>
+        <h3>Latitude: {latitude && latitude} </h3>
+        <h3>Longitude: {longitude && longitude} </h3>
+        <button className="normal" onClick={saveAndReturn}>Save Location</button>
       </div> 
     </div>
   )

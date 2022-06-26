@@ -7,7 +7,7 @@ import AddContact from "./components/contact/AddContact";
 import ShowContacts from "./components/contact/ShowContacts";
 import EditContact from "./components/contact/EditContact";
 import Leaflet from "./components/leaflet/Leaflet";
-import TestMap from "./components/leaflet/TestMap";
+import Map from "./components/leaflet/Map";
 
 function App() {
   return (
@@ -28,7 +28,7 @@ function App() {
             path="/map1"
             element={
               <>
-              <TestMap/>
+              <Map/>
               </>
             }
             ></Route>

@@ -1,6 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
+import useStore from "../zustand/Store";
+import { FaMapMarkedAlt } from 'react-icons/fa';
+import { FaMailBulk } from 'react-icons/fa';
+import { FaUserAlt } from 'react-icons/fa';
+import { FaPhoneAlt } from 'react-icons/fa';
+import { FaIdCard } from 'react-icons/fa';
 
 
 const AddContact = () => {
@@ -9,9 +14,27 @@ const AddContact = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [relationship, setStatus] = useState("");
   const [email, setEmail] = useState("");
+  const [latitude, setLatitude] = useState("");
+  const [longitude, setLongitude] = useState("");
   const [alert, setAlert] = useState(false);
   let navigate = useNavigate();
 
+  //Testing Zustand
+  // const bears = useStore(state => state.bears)
+  // console.log("bears: ", bears);
+  // useStore.setState({ fullName: "hamze" });
+  // console.log(useStore.getState().fullName)
+  // console.log(useStore.getState().phoneNumber)
+  
+  // onLoad fetch info from store/Zustand if any:
+  useEffect(() => {
+    setFullName(useStore.getState().fullName);
+    setPhoneNumber(useStore.getState().phoneNumber);
+    setStatus(useStore.getState().relationship);
+    setEmail(useStore.getState().email);
+    setLatitude(useStore.getState().latitude);
+    setLongitude(useStore.getState().longitude);
+  }, []);
 
 
   const saveToServer = async (data) => {
@@ -26,22 +49,30 @@ const AddContact = () => {
     });
     const response = await res.json();
     console.log(response);
-  }
+  };
 
   const validate = (e) => {
     e.preventDefault();
     setAlert(false);
-    if (!fullName || !phoneNumber || !relationship || !email){
+    if (!fullName || !phoneNumber || !relationship || !email) {
       setAlert(true);
       return;
     }
     // get the id from the local storage
     let user = localStorage.getItem("user_id");
-    saveToServer({fullName, phoneNumber, relationship, email, user });
-    setFullName('');
-    setPhoneNumber('');
-    setStatus('');
-    setEmail('');
+    saveToServer({ fullName, phoneNumber, relationship, email, user });
+    setFullName("");
+    setPhoneNumber("");
+    setStatus("");
+    setEmail("");
+  };
+
+  // Save info into store before navigate to map
+  const saveInfo = () => {
+    useStore.setState({ fullName });
+    useStore.setState({ phoneNumber });
+    useStore.setState({ relationship });
+    useStore.setState({ email });
   }
 
   return (
@@ -49,47 +80,62 @@ const AddContact = () => {
       <div className="container">
         <h2>Add New Contact</h2>
         <p>Please Fill out all fields</p>
-        <p className="alert">{alert && "All fields required" }</p> 
+        <p className="alert">{alert && "All fields required"}</p>
         <form>
-          <label htmlFor="">Full Name</label>
+          <label htmlFor=""><FaUserAlt/> {" "} Full Name</label>
           <input
-            value = {fullName}
+            value={fullName}
             type="text"
             placeholder="Full Name"
             onChange={(e) => {
               setFullName(e.target.value);
             }}
           />
-          <label htmlFor="">Phone Number</label>
+          <label htmlFor=""><FaPhoneAlt/> {" "} Phone Number</label>
           <input
-          value = {phoneNumber}
+            value={phoneNumber}
             type="text"
             placeholder="Phone Number"
             onChange={(e) => {
               setPhoneNumber(e.target.value);
             }}
           />
-          <label htmlFor="">Relationship Status</label>
+          <label htmlFor=""><FaIdCard/> {" "} Relationship Status</label>
           <input
-          value = {relationship}
+            value={relationship}
             type="text"
             placeholder="Relationship Status"
             onChange={(e) => {
               setStatus(e.target.value);
             }}
           />
-          <label htmlFor="">Email</label>
+          <label htmlFor=""><FaMailBulk/> {" "}Email</label>
           <input
-          value = {email}
+            value={email}
             type="text"
             placeholder="Email"
             onChange={(e) => {
               setEmail(e.target.value);
             }}
           />
-          <label htmlFor="">Location <a onClick={()=>{navigate('/map1')}} className="location-arrow" >-></a> </label>
-          <input type="text"  />
-          <button type="submit" onClick={validate}>Submit</button>
+          <label htmlFor="">
+          <FaMapMarkedAlt />{" "}
+            Location{" "}
+            <a
+              onClick={() => {
+                saveInfo();
+                navigate("/map1");
+              }}
+              className="location-arrow"
+            >
+              Choose location
+            </a>{" "}
+          </label>
+          <input type="text" value={latitude} placeholder="latitude " />
+          <input type="text" value={longitude} placeholder="longitude" />
+          <button type="submit" onClick={validate}>
+            Submit
+          </button>
         </form>
       </div>
     </div>

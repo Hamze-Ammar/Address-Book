@@ -295,7 +295,9 @@ span.psw {
   border: 1px solid #333;
   margin: 25px 0;
 }
-
+.table {
+  overflow-x:auto;
+}
 table {
   border-collapse: collapse;
   width: 100%;
@@ -353,6 +355,51 @@ tr:hover {
   text-decoration: none;
   cursor: pointer;
 }
+
+/* =====Delete popup====== */
+/* The Modal (background) */
+.modal-delete { 
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: #474e5d;
+  padding-top: 50px;
+}
+/* Modal Content/Box */
+.modal-content-delete {
+  background-color: #fefefe;
+  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+
+.container-delete {
+  padding: 16px;
+  text-align: center;
+}
+/* Clear floats */
+.clearfix-delete::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+.clearfix-delete .cancelbtn, .deletebtn {
+  float: left;
+  width: 50%;
+}
+.clearfix-delete .cancelbtn {
+  background-color: #ccc;
+  color: black;
+}
+
+.clearfix-delete .deletebtn {
+  background-color: #f44336;
+}
+
 
 /* =====Leaflet ==== */
 

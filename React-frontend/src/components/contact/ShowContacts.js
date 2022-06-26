@@ -114,7 +114,7 @@ const ShowContacts = () => {
               }}
             />
           )}{" "}
-          {showSearch && <input className="select" type="submit" />}
+          {showSearch && <input className="select" type="submit" value={"Filter"} />}
         </form>
       </div>
       <hr />
@@ -126,7 +126,7 @@ const ShowContacts = () => {
             <th>Status</th>
             <th>Email</th>
             <th colspan="2">Location</th>
-            <th>...</th>
+            <th></th>
           </tr>
           {contacts &&
             contacts.map((contact) => {

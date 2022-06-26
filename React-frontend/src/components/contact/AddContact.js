@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+
 
 
 const AddContact = () => {
@@ -8,6 +10,8 @@ const AddContact = () => {
   const [relationship, setStatus] = useState("");
   const [email, setEmail] = useState("");
   const [alert, setAlert] = useState(false);
+  let navigate = useNavigate();
+
 
 
   const saveToServer = async (data) => {
@@ -83,8 +87,8 @@ const AddContact = () => {
               setEmail(e.target.value);
             }}
           />
-          <label htmlFor="">Location</label>
-          <input type="text" />
+          <label htmlFor="">Location <a onClick={()=>{navigate('/map1')}} className="location-arrow" >-></a> </label>
+          <input type="text"  />
           <button type="submit" onClick={validate}>Submit</button>
         </form>
       </div>

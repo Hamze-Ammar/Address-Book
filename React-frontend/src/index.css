@@ -240,19 +240,17 @@ span.psw {
   }
 }
 
-
 /* =====Add Contact===== */
 
 .add-contact .container {
   margin: 15px auto;
   width: 700px;
-  background-color:rgb(82, 79, 79);
+  background-color: rgb(82, 79, 79);
   color: #fff;
   padding: 30px;
-  border: 17px solid #04aa6d ;
+  border: 17px solid #04aa6d;
   border-radius: 5px;
 }
-
 
 @media screen and (max-width: 920px) {
   .add-contact .container {
@@ -278,12 +276,24 @@ span.psw {
   color: #f44336;
 }
 
+.location-arrow {
+  color: rgb(6, 245, 26);
+  font-size: 18px;
+  font-weight: 900;
+  cursor: pointer;
+}
+.location-arrow:hover {
+  color: rgb(95, 182, 45);
+
+}
+
+
 /* ======show contact======= */
 
 .show-contact hr {
   width: 85%;
   border: 1px solid #333;
-  margin: 25px 0 ;
+  margin: 25px 0;
 }
 
 table {
@@ -291,7 +301,8 @@ table {
   width: 100%;
 }
 
-td, th {
+td,
+th {
   border: 1px solid #dddddd;
   text-align: left;
   padding: 8px;
@@ -301,14 +312,13 @@ tr:nth-child(even) {
   background-color: #dddddd;
 }
 
-
 tr:hover {
-  background-color:#ffffff;
+  background-color: #ffffff;
   color: rgb(0, 0, 0);
 }
 
 .green {
-  color:#04aa6d;
+  color: #04aa6d;
 }
 .red {
   color: #f44336;
@@ -329,10 +339,47 @@ tr:hover {
   font-size: 15px;
 }
 
-
 /* =====Leaflet ==== */
 
 .leaflet-container {
-  width:100%;
+  width: 100%;
   height: 100vh;
+}
+
+/* .main-map {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+} */
+.map-container {
+  width: 100vw;
+  height: 80vh;
+  /* position: absolute;
+  z-index: -1; */
+}
+
+/* .modal-map {
+  position: absolute;
+  top: 200px;
+  left: 0;
+  z-index: 1;
+  min-width: 200px;
+  min-height: 200px;
+  background-color: #04aa6d;
+} */
+.modal-map {
+  margin: 10px;
+  padding: 5px 20px;
+  border: 1px solid #333;
+  width: 90vw;
+  background-color: #04aa6d;
+  color: #333;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.normal {
+  width: 150px;
+  background-color: #333;
 }

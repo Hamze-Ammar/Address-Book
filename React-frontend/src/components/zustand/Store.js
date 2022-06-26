@@ -7,7 +7,8 @@ const useStore = create(set => ({
   relationship: "",
   email: "",
   latitude : "",
-  longitude: ""
+  longitude: "",
+  clearStore: () => set({ fullName: "" , phoneNumber: "",relationship: "",email: "",latitude : "",longitude: ""})
 }))
 
 

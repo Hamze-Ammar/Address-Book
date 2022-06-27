@@ -284,9 +284,7 @@ span.psw {
 }
 .location-arrow:hover {
   color: rgb(95, 182, 45);
-
 }
-
 
 /* ======show contact======= */
 
@@ -296,7 +294,8 @@ span.psw {
   margin: 25px 0;
 }
 .table {
-  overflow-x:auto;
+  overflow-x: auto;
+  min-height: 400px;
 }
 table {
   border-collapse: collapse;
@@ -358,7 +357,7 @@ tr:hover {
 
 /* =====Delete popup====== */
 /* The Modal (background) */
-.modal-delete { 
+.modal-delete {
   position: fixed; /* Stay in place */
   z-index: 1; /* Sit on top */
   left: 0;
@@ -387,7 +386,8 @@ tr:hover {
   clear: both;
   display: table;
 }
-.clearfix-delete .cancelbtn, .deletebtn {
+.clearfix-delete .cancelbtn,
+.deletebtn {
   float: left;
   width: 50%;
 }
@@ -399,7 +399,6 @@ tr:hover {
 .clearfix-delete .deletebtn {
   background-color: #f44336;
 }
-
 
 /* =====Leaflet ==== */
 
@@ -448,11 +447,11 @@ tr:hover {
 
 /* ====show password===== */
 .password-field {
-  position:relative ;
+  position: relative;
 }
 .eye {
   font-size: 18px;
-  position:absolute ;
+  position: absolute;
   right: 20px;
   top: 20px;
   cursor: pointer;
@@ -460,4 +459,51 @@ tr:hover {
 }
 .eye:hover {
   color: #333;
+}
+
+/* =====Dropdown filters show contacts ===== */
+
+.filter-icon {
+  float: right;
+  color: #888;
+  cursor: pointer;
+}
+.filter-icon:hover {
+  color: #333;
+}
+
+.dropdown-filter {
+  position: relative;
+  display: inline-block;
+  float: right;
+}
+.dropdown-filter .dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  overflow: auto;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  top: 20px;
+  right: -20px;
+}
+
+.dropdown-filter .dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-filter .dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+.showMe {
+  display: block !important;
+}
+
+.test {
+  color: #04aa6d;
 }

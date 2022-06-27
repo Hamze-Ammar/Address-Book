@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Row from "./Row";
 import ConfirmDelete from "./ConfirmDelete";
+import { FaFilter } from "react-icons/fa";
 
 const ShowContacts = () => {
   const [contacts, setContacts] = useState([]);
@@ -12,42 +13,38 @@ const ShowContacts = () => {
   //Delete confirmation states
   const [showDelete, setShowDelete] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState(false);
-  const [deletedId, setDeletedId] = useState('');
-//   console.log(filter);
-//   console.log(option);
+  const [deletedId, setDeletedId] = useState("");
+  //   console.log(filter);
+  //   console.log(option);
 
   //Filtering
   const runSearch = (e) => {
     e.preventDefault();
-    console.log(e);
-    if (option==="all" || !filter){
-        setContacts(spare);
+    if (option === "all" || !filter) {
+      setContacts(spare);
     }
     if (filter) {
       if (option === "start") {
         setContacts(
-          contacts.filter(
-            (contact) => String(contact.fullName).startsWith(String(filter))
+          contacts.filter((contact) =>
+            String(contact.fullName).startsWith(String(filter))
+          )
+        );
+      } else if (option === "end") {
+        setContacts(
+          contacts.filter((contact) =>
+            String(contact.fullName).endsWith(String(filter))
+          )
+        );
+      } else if (option === "include") {
+        setContacts(
+          contacts.filter((contact) =>
+            String(contact.fullName).includes(String(filter))
           )
         );
       }
-      else if (option==="end"){
-        setContacts(
-            contacts.filter(
-              (contact) => String(contact.fullName).endsWith(String(filter))
-            )
-          );
-      }
-      else if (option==="include"){
-        setContacts(
-            contacts.filter(
-              (contact) => String(contact.fullName).includes(String(filter))
-            )
-          );
-      }
-      }
     }
-  
+  };
 
   // Initialize all tasks into state from backend at component load
   useEffect(() => {
@@ -79,6 +76,48 @@ const ShowContacts = () => {
     } catch (err) {
       console.log(err);
     }
+  };
+
+  // Dropdown filter inline
+  const [displayDropdownStatus, setDisplayDropdownStatus] = useState(false);
+  const toggleClassDropdown = () => {
+    setDisplayDropdownStatus(!displayDropdownStatus);
+    console.log(displayDropdownStatus);
+  };
+
+  // Dropdown Status filter search function
+  const runFilterSearch = (status) => {
+    // if (counter ===4){
+    //     return
+    // }
+    // if (contacts.length === 0) {
+    //     console.log("empty");
+    //     setContacts(spare);
+    //     counter++;
+    //     console.log(counter);
+    //     runFilterSearch(status, counter);
+    //     return
+    // }
+    if (status === "married" && contacts) {
+      console.log("from married ", contacts);
+      //   setContacts(spare);
+      setContacts(
+        contacts.filter((contact) => String(contact.relationship) === "married")
+      );
+    } else if (status === "single") {
+      setContacts(
+        contacts.filter((contact) => String(contact.relationship) === "single")
+      );
+    } else if (status === "divorced") {
+      setContacts(
+        contacts.filter(
+          (contact) => String(contact.relationship) === "divorced"
+        )
+      );
+    } else {
+      setContacts(spare);
+    }
+    setDisplayDropdownStatus(!displayDropdownStatus);
   };
 
   return (
@@ -114,7 +153,9 @@ const ShowContacts = () => {
               }}
             />
           )}{" "}
-          {showSearch && <input className="select" type="submit" value={"Filter"} />}
+          {showSearch && (
+            <input className="select" type="submit" value={"Filter"} />
+          )}
         </form>
       </div>
       <hr />
@@ -123,19 +164,77 @@ const ShowContacts = () => {
           <tr>
             <th>Full Name</th>
             <th>Phone Number</th>
-            <th>Status</th>
+            <th>
+              Status{" "}
+              <div className="dropdown-filter">
+                {" "}
+                <span className="filter-icon" onClick={toggleClassDropdown}>
+                  <FaFilter />
+                </span>
+                <div
+                  className={`dropdown-content ${
+                    displayDropdownStatus ? "showMe" : ""
+                  }`}
+                  //   {displayDropdownStatus ? className="dropdown-content show" : ""}
+                >
+                  <a
+                    onClick={() => {
+                      runFilterSearch("married");
+                    }}
+                  >
+                    Married
+                  </a>
+                  <a
+                    onClick={() => {
+                      runFilterSearch("single");
+                    }}
+                  >
+                    Single
+                  </a>
+                  <a
+                    onClick={() => {
+                      runFilterSearch("divorced");
+                    }}
+                  >
+                    Divorced
+                  </a>
+                  <a
+                    onClick={() => {
+                      runFilterSearch("all");
+                    }}
+                  >
+                    All
+                  </a>
+                </div>
+              </div>
+            </th>
             <th>Email</th>
-            <th colspan="2">Location</th>
+            <th colSpan="2">Location</th>
             <th></th>
           </tr>
           {contacts &&
             contacts.map((contact) => {
-              return <Row contact={contact} setReload={setReload} setShowDelete={setShowDelete} confirmDelete={confirmDelete} setConfirmDelete={setConfirmDelete} deletedId={deletedId} setDeletedId={setDeletedId} />;
+              return (
+                <Row
+                  contact={contact}
+                  setReload={setReload}
+                  setShowDelete={setShowDelete}
+                  confirmDelete={confirmDelete}
+                  setConfirmDelete={setConfirmDelete}
+                  deletedId={deletedId}
+                  setDeletedId={setDeletedId}
+                />
+              );
             })}
           {/* {contacts.filter((contact)=> contact.fullName == filter ).length} */}
         </table>
       </div>
-      {showDelete && <ConfirmDelete setShowDelete={setShowDelete} setConfirmDelete={setConfirmDelete}/>}
+      {showDelete && (
+        <ConfirmDelete
+          setShowDelete={setShowDelete}
+          setConfirmDelete={setConfirmDelete}
+        />
+      )}
     </div>
   );
 };

@@ -8,7 +8,7 @@ import {
   useMapEvents,
 } from "react-leaflet";
 import { useState } from "react";
-import { Icon } from "leaflet";
+import L  from "leaflet";
 import useStore from "../zustand/Store";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -18,6 +18,13 @@ const TestMap = () => {
     console.log(latitude);
     console.log(longitude);
     let navigate = useNavigate();
+    const myIcon = new L.icon({
+      // iconUrl: require('../node_modules/leaflet/dist/images/marker-icon.png'), // your path may vary ...
+      iconUrl: require('../../../node_modules/leaflet/dist/images/marker-icon.png'), // your path may vary ...
+      iconSize: [8, 8],
+      iconAnchor: [2, 2],
+      popupAnchor: [0, -2]
+    });
 
     //Onclick saveAndReturn
     const saveAndReturn = () => {
@@ -54,8 +61,8 @@ const TestMap = () => {
 
     return (
       <React.Fragment>
-        {markers.map((marker) => (
-          <Marker position={marker} icon={Icon}></Marker>
+        {markers.map((marker, index) => (
+          <Marker position={marker} interactive={false} key={index} icon={myIcon} ></Marker>
         ))}
       </React.Fragment>
     );

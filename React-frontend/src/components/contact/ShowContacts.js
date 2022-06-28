@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Row from "./Row";
 import ConfirmDelete from "./ConfirmDelete";
 import { FaFilter } from "react-icons/fa";
+import { FaSearch } from "react-icons/fa";
 
 const ShowContacts = () => {
   const [contacts, setContacts] = useState([]);
@@ -14,21 +15,32 @@ const ShowContacts = () => {
   const [showDelete, setShowDelete] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [deletedId, setDeletedId] = useState("");
-  //   console.log(filter);
-  //   console.log(option);
 
   //Filtering
-  const runSearch = (e) => {
+  // let counter=0;
+  const runSearch =  (e) => {
     e.preventDefault();
+
+    // lets try one more time=====
+    // if (!contacts.length){
+    //   console.log('empty');
+    //   console.log('option', option);
+    //   console.log('filter', filter);
+    //    setContacts(spare);
+    //   if (counter<10){counter++; runSearch(e);}
+    // }
+    
+    //End trial===================
+
     if (option === "all" || !filter) {
       setContacts(spare);
     }
     if (filter) {
       if (option === "start") {
         setContacts(
-          contacts.filter((contact) =>
-            String(contact.fullName).startsWith(String(filter))
-          )
+        contacts.filter((contact) =>
+          String(contact.fullName).startsWith(String(filter))
+        )
         );
       } else if (option === "end") {
         setContacts(
@@ -44,6 +56,7 @@ const ShowContacts = () => {
         );
       }
     }
+  
   };
 
   // Initialize all tasks into state from backend at component load
@@ -87,17 +100,6 @@ const ShowContacts = () => {
 
   // Dropdown Status filter search function
   const runFilterSearch = (status) => {
-    // if (counter ===4){
-    //     return
-    // }
-    // if (contacts.length === 0) {
-    //     console.log("empty");
-    //     setContacts(spare);
-    //     counter++;
-    //     console.log(counter);
-    //     runFilterSearch(status, counter);
-    //     return
-    // }
     if (status === "married" && contacts) {
       console.log("from married ", contacts);
       //   setContacts(spare);
@@ -120,10 +122,42 @@ const ShowContacts = () => {
     setDisplayDropdownStatus(!displayDropdownStatus);
   };
 
+
+  // The Main Search Bar
+  const [showLoopIcon, setShowLoopIcon] = useState(true);
+  const [searchBarInput, setSearchBarInput] = useState('');
+  const runSearchBar = (e) => {
+    // console.log(e.target.value);
+    if (e.target.value){
+      setShowLoopIcon(false);
+      // setOption("include");
+      // setFilter(e.target.value);
+      setSearchBarInput(e.target.value);
+      // runSearch(e);
+    }
+    else{
+      setShowLoopIcon(true);
+    }
+  }
+  useEffect(() => {
+    // setContacts(spare);
+    // setContacts(
+    //   contacts.filter((contact) =>
+    //     String(contact.fullName).includes(String(searchBarInput))
+    //   )
+    // );
+    //console.log(contacts)
+  }, [searchBarInput]);
+  //End main search bar
+
   return (
     <div className="container show-contact">
       <div className="header">
         <h1>Contacts List</h1>
+        <div className="search-bar">
+          <input type="search" placeholder="Search..." onChange={(e)=>{runSearchBar(e)}}/>
+          {showLoopIcon && <span className="span-search-icon"><FaSearch/></span>}
+        </div>
         <form onSubmit={runSearch}>
           <label htmlFor="">Filter Names By</label>{" "}
           <select
@@ -148,7 +182,6 @@ const ShowContacts = () => {
               name="filter"
               value={filter}
               onChange={(e) => {
-                console.log("hi");
                 setFilter(e.target.value);
               }}
             />
@@ -175,7 +208,6 @@ const ShowContacts = () => {
                   className={`dropdown-content ${
                     displayDropdownStatus ? "showMe" : ""
                   }`}
-                  //   {displayDropdownStatus ? className="dropdown-content show" : ""}
                 >
                   <a
                     onClick={() => {
@@ -209,13 +241,17 @@ const ShowContacts = () => {
               </div>
             </th>
             <th>Email</th>
-            <th colSpan="2">Location</th>
+            <th colSpan="2" className="col-times2">
+              Location
+            </th>
             <th></th>
           </tr>
-          {contacts &&
-            contacts.map((contact) => {
+          <tbody>
+          {contacts && showLoopIcon ?
+            contacts.map((contact, index) => {
               return (
                 <Row
+                  key={index}
                   contact={contact}
                   setReload={setReload}
                   setShowDelete={setShowDelete}
@@ -225,8 +261,27 @@ const ShowContacts = () => {
                   setDeletedId={setDeletedId}
                 />
               );
-            })}
-          {/* {contacts.filter((contact)=> contact.fullName == filter ).length} */}
+            })
+            :
+            contacts.filter((contact) =>
+                String(contact.fullName).includes(String(searchBarInput))
+              ).map((contact, index) => {
+                return (
+                  <Row
+                    key={index}
+                    contact={contact}
+                    setReload={setReload}
+                    setShowDelete={setShowDelete}
+                    confirmDelete={confirmDelete}
+                    setConfirmDelete={setConfirmDelete}
+                    deletedId={deletedId}
+                    setDeletedId={setDeletedId}
+                  />
+                );
+              })
+          }
+
+            </tbody>
         </table>
       </div>
       {showDelete && (

@@ -27,15 +27,15 @@ export default function Login() {
       body: JSON.stringify(credentials),
     });
     const data = await res.json();
-    console.log(data);
+    // console.log(data);
     // data.error ? alert("User Not Found") : alert("You are now signed in!");
     if (data.err) {
       alert(data.err);
     } else if (data.access_token) {
       let token = data.access_token;
-      console.log(token);
+      // console.log(token);
       let user_info = jwt_decode(token);
-      console.log(user_info);
+      // console.log(user_info);
       token && localStorage.setItem("access_token", token);
       user_info && localStorage.setItem("user_id", user_info._id);
       user_info && localStorage.setItem("user_name", user_info.name);

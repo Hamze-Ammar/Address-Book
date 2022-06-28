@@ -1,22 +1,29 @@
-import React  from "react";
+import React, { useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { FaPen, FaTrashAlt } from "react-icons/fa";
 import { useEffect } from "react";
 
-const Row = ({ contact, setReload, setShowDelete, confirmDelete, setConfirmDelete,deletedId, setDeletedId }) => {
-    const navigate = useNavigate();
-//   console.log("1: ",String(contact.location.coordinates[0]));
+const Row = ({
+  contact,
+  setReload,
+  setShowDelete,
+  confirmDelete,
+  setConfirmDelete,
+  deletedId,
+  setDeletedId,
+}) => {
+  const navigate = useNavigate();
+  //   console.log("1: ",String(contact.location.coordinates[0]));
   let id = contact._id;
 
   //Confirm delete:
   const askToConfirm = () => {
     setShowDelete(true);
-  }
+  };
 
-  
   useEffect(() => {
-    if (confirmDelete && deletedId=== id){
-        deleteContact();
+    if (confirmDelete && deletedId === id) {
+      deleteContact();
     }
   }, [confirmDelete]);
 
@@ -35,7 +42,7 @@ const Row = ({ contact, setReload, setShowDelete, confirmDelete, setConfirmDelet
       );
       const response = await res.json();
       console.log(response);
-      if (response.msg==="contact removed"){
+      if (response.msg === "contact removed") {
         console.log("yes");
         setConfirmDelete(false);
         setReload(id);
@@ -45,6 +52,17 @@ const Row = ({ contact, setReload, setShowDelete, confirmDelete, setConfirmDelet
     }
   };
 
+  // Search bar handeling
+  // const [isFound, setIsFound] = useState(false);
+  // if (searchBarInput){
+  //   if (contact.fullName.includes(searchBarInput)){
+  //     setIsFound(true);
+  //   }
+  //   else{
+  //     setIsFound(false);
+  //   }
+  // }
+
   return (
     <>
       <tr>
@@ -52,8 +70,12 @@ const Row = ({ contact, setReload, setShowDelete, confirmDelete, setConfirmDelet
         <td>{contact.phoneNumber}</td>
         <td>{contact.relationship}</td>
         <td>{contact.email}</td>
-        <td>{contact.location ? String(contact.location.coordinates[0]) : ""}</td>
-        <td>{contact.location  ? String(contact.location.coordinates[1]): ""}</td>
+        <td>
+          {contact.location ? String(contact.location.coordinates[0]) : ""}
+        </td>
+        <td>
+          {contact.location ? String(contact.location.coordinates[1]) : ""}
+        </td>
         <td>
           <span
             className="icon red"
@@ -65,10 +87,11 @@ const Row = ({ contact, setReload, setShowDelete, confirmDelete, setConfirmDelet
           >
             <FaTrashAlt />
           </span>
-          <span className="icon green"
-          onClick={()=>{
-            navigate(`/edit/${contact._id}`)
-          }}
+          <span
+            className="icon green"
+            onClick={() => {
+              navigate(`/edit/${contact._id}`);
+            }}
           >
             <FaPen />
           </span>

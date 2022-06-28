@@ -15,15 +15,9 @@ const AddContact = () => {
   const [email, setEmail] = useState("");
   const [latitude, setLatitude] = useState("");
   const [longitude, setLongitude] = useState("");
-  const [alert, setAlert] = useState(false);
+  const [alertMsg, setAlert] = useState(false);
   let navigate = useNavigate();
 
-  //Testing Zustand
-  // const bears = useStore(state => state.bears)
-  // console.log("bears: ", bears);
-  // useStore.setState({ fullName: "hamze" });
-  // console.log(useStore.getState().fullName)
-  // console.log(useStore.getState().phoneNumber)
 
   // onLoad fetch info from store/Zustand if any:
   useEffect(() => {
@@ -37,7 +31,12 @@ const AddContact = () => {
 
 
   const saveToServer = async (data) => {
-    console.log(data);
+    let token = localStorage.getItem("access_token");
+    if (!token){
+      alert("You are not signed in!")
+      return;
+    }
+    try {
     const res = await fetch("http://localhost:3001/api/contact/add", {
       method: "POST",
       headers: {
@@ -48,6 +47,10 @@ const AddContact = () => {
     });
     const response = await res.json();
     console.log(response);
+    if(response){alert("New contact has been successfully added!")}
+  }catch(err){
+    console.log(err);
+  }
   };
 
   const validate = (e) => {
@@ -115,7 +118,7 @@ const AddContact = () => {
         </span>
         <h2>Add New Contact</h2>
         <p>Please Fill out all fields</p>
-        <p className="alert">{alert && "All fields required"}</p>
+        <p className="alert">{alertMsg && "All fields required"}</p>
         <form>
           <label htmlFor="">
             <FaUserAlt /> Full Name

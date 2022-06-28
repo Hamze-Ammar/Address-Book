@@ -307,6 +307,10 @@ th {
   border: 1px solid #dddddd;
   text-align: left;
   padding: 8px;
+  width:14%;
+}
+.col-times2 {
+  width: 28%
 }
 
 tr:nth-child(even) {
@@ -423,20 +427,12 @@ tr:hover {
   z-index: -1; */
 }
 
-/* .modal-map {
-  position: absolute;
-  top: 200px;
-  left: 0;
-  z-index: 1;
-  min-width: 200px;
-  min-height: 200px;
-  background-color: #04aa6d;
-} */
+
 .modal-map {
-  margin: 10px;
+  margin: 10px auto;
   padding: 5px 20px;
   border: 1px solid #333;
-  width: 90vw;
+  width: 95vw;
   background-color: #04aa6d;
   color: #333;
   display: flex;
@@ -510,4 +506,33 @@ tr:hover {
 
 .test {
   color: #04aa6d;
+}
+
+/* =====Search bar & icon; show contacts ====== */
+.search-bar{
+  position: relative;
+  display:inline-block;
+}
+.span-search-icon {
+  color: rgb(122, 121, 121);
+  position:absolute ;
+  top: 25px;
+  right: 20px;
+  font-size: large;
+}
+
+input[type="search"]{
+  width: 300px;
+  padding: 5px;
+  margin: 15px 0;
+  font-size: large;
+  border-radius: 8px;
+}
+input[type="search"]:focus{
+  outline-color:#04aa6d;
+  /* border:#04aa6d; */
+}
+
+.left-border {
+  color: #f44336;
 }

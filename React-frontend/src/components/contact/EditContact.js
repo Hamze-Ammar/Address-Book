@@ -68,6 +68,10 @@ const EditContact = () => {
     );
     const response = await res.json();
     console.log(response);
+    if (response){
+      alert(response.msg);
+      navigate('/');
+    }
   };
 
   const validate = (e) => {

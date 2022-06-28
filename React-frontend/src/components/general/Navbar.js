@@ -35,16 +35,16 @@ export default function Navbar(props) {
           
         </div>
         <div>
-          <Link to="/login">
+          {!name && <Link to="/login">
             <span className="topnav-right" href="#">
               Login
             </span>
-          </Link>
-          <Link to="/register">
+          </Link>}
+          {!name && <Link to="/register">
             <span className="topnav-right" href="#">
               Register
             </span>
-          </Link>
+          </Link>}
           <a className="topnav-right" href="#" onClick={logOut}>
             Logout
           </a>

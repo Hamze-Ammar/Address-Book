@@ -52,17 +52,6 @@ const Row = ({
     }
   };
 
-  // Search bar handeling
-  // const [isFound, setIsFound] = useState(false);
-  // if (searchBarInput){
-  //   if (contact.fullName.includes(searchBarInput)){
-  //     setIsFound(true);
-  //   }
-  //   else{
-  //     setIsFound(false);
-  //   }
-  // }
-
   return (
     <>
       <tr>

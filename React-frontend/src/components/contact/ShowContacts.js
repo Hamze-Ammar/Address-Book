@@ -18,7 +18,7 @@ const ShowContacts = () => {
 
   //Filtering
   // let counter=0;
-  const runSearch =  (e) => {
+  const runSearch = (e) => {
     e.preventDefault();
 
     // lets try one more time=====
@@ -29,7 +29,7 @@ const ShowContacts = () => {
     //    setContacts(spare);
     //   if (counter<10){counter++; runSearch(e);}
     // }
-    
+
     //End trial===================
 
     if (option === "all" || !filter) {
@@ -38,9 +38,9 @@ const ShowContacts = () => {
     if (filter) {
       if (option === "start") {
         setContacts(
-        contacts.filter((contact) =>
-          String(contact.fullName).startsWith(String(filter))
-        )
+          contacts.filter((contact) =>
+            String(contact.fullName).startsWith(String(filter))
+          )
         );
       } else if (option === "end") {
         setContacts(
@@ -56,7 +56,6 @@ const ShowContacts = () => {
         );
       }
     }
-  
   };
 
   // Initialize all tasks into state from backend at component load
@@ -122,23 +121,21 @@ const ShowContacts = () => {
     setDisplayDropdownStatus(!displayDropdownStatus);
   };
 
-
   // The Main Search Bar
   const [showLoopIcon, setShowLoopIcon] = useState(true);
-  const [searchBarInput, setSearchBarInput] = useState('');
+  const [searchBarInput, setSearchBarInput] = useState("");
   const runSearchBar = (e) => {
     // console.log(e.target.value);
-    if (e.target.value){
+    if (e.target.value) {
       setShowLoopIcon(false);
       // setOption("include");
       // setFilter(e.target.value);
       setSearchBarInput(e.target.value);
       // runSearch(e);
-    }
-    else{
+    } else {
       setShowLoopIcon(true);
     }
-  }
+  };
   useEffect(() => {
     // setContacts(spare);
     // setContacts(
@@ -155,8 +152,18 @@ const ShowContacts = () => {
       <div className="header">
         <h1>Contacts List</h1>
         <div className="search-bar">
-          <input type="search" placeholder="Search..." onChange={(e)=>{runSearchBar(e)}}/>
-          {showLoopIcon && <span className="span-search-icon"><FaSearch/></span>}
+          <input
+            type="search"
+            placeholder="Search..."
+            onChange={(e) => {
+              runSearchBar(e);
+            }}
+          />
+          {showLoopIcon && (
+            <span className="span-search-icon">
+              <FaSearch />
+            </span>
+          )}
         </div>
         <form onSubmit={runSearch}>
           <label htmlFor="">Filter Names By</label>{" "}
@@ -247,41 +254,40 @@ const ShowContacts = () => {
             <th></th>
           </tr>
           <tbody>
-          {contacts && showLoopIcon ?
-            contacts.map((contact, index) => {
-              return (
-                <Row
-                  key={index}
-                  contact={contact}
-                  setReload={setReload}
-                  setShowDelete={setShowDelete}
-                  confirmDelete={confirmDelete}
-                  setConfirmDelete={setConfirmDelete}
-                  deletedId={deletedId}
-                  setDeletedId={setDeletedId}
-                />
-              );
-            })
-            :
-            contacts.filter((contact) =>
-                String(contact.fullName).includes(String(searchBarInput))
-              ).map((contact, index) => {
-                return (
-                  <Row
-                    key={index}
-                    contact={contact}
-                    setReload={setReload}
-                    setShowDelete={setShowDelete}
-                    confirmDelete={confirmDelete}
-                    setConfirmDelete={setConfirmDelete}
-                    deletedId={deletedId}
-                    setDeletedId={setDeletedId}
-                  />
-                );
-              })
-          }
-
-            </tbody>
+            {contacts && showLoopIcon
+              ? contacts.map((contact, index) => {
+                  return (
+                    <Row
+                      key={index}
+                      contact={contact}
+                      setReload={setReload}
+                      setShowDelete={setShowDelete}
+                      confirmDelete={confirmDelete}
+                      setConfirmDelete={setConfirmDelete}
+                      deletedId={deletedId}
+                      setDeletedId={setDeletedId}
+                    />
+                  );
+                })
+              : contacts
+                  .filter((contact) =>
+                    String(contact.fullName).includes(String(searchBarInput))
+                  )
+                  .map((contact, index) => {
+                    return (
+                      <Row
+                        key={index}
+                        contact={contact}
+                        setReload={setReload}
+                        setShowDelete={setShowDelete}
+                        confirmDelete={confirmDelete}
+                        setConfirmDelete={setConfirmDelete}
+                        deletedId={deletedId}
+                        setDeletedId={setDeletedId}
+                      />
+                    );
+                  })}
+          </tbody>
         </table>
       </div>
       {showDelete && (

@@ -12,64 +12,62 @@ import Map from "./components/leaflet/Map";
 function App() {
   return (
     <BrowserRouter>
-    <div className="App">
-      <Navbar/>
-      <Routes>
-        {/* Testing leaflet */}
-        <Route
+      <div className="App">
+        <Navbar />
+        <Routes>
+          <Route
             path="/map"
             element={
               <>
-              <Leaflet/>
+                <Leaflet />
               </>
             }
-            ></Route>
-            <Route
+          ></Route>
+          <Route
             path="/map1"
             element={
               <>
-              <Map/>
+                <Map />
               </>
             }
-            ></Route>
-        {/* End Testing leaflet */}
+          ></Route>
 
-      <Route
+          <Route
             path="/"
             element={
               <>
-              <ShowContacts/>
+                <ShowContacts />
               </>
             }
-            ></Route>
-        <Route path="edit/:id" element={<EditContact />}></Route>
+          ></Route>
+          <Route path="edit/:id" element={<EditContact />}></Route>
 
-      <Route
+          <Route
             path="/add"
             element={
               <>
-              <AddContact/>
+                <AddContact />
               </>
             }
-            ></Route>
-      <Route
+          ></Route>
+          <Route
             path="/login"
             element={
               <>
-              <Login/>
+                <Login />
               </>
             }
-            ></Route>
-      <Route
+          ></Route>
+          <Route
             path="/register"
             element={
               <>
-              <Register/>
+                <Register />
               </>
             }
-            ></Route>
-      </Routes>
-    </div>
+          ></Route>
+        </Routes>
+      </div>
     </BrowserRouter>
   );
 }
